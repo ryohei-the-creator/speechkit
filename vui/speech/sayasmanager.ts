@@ -8,7 +8,7 @@ export enum SayAs {
     unit = 'unit',
     verbatim = 'verbatim',
     spellout = 'spellout',
-    date = 'date',
+    date = 'date', //TODO: 他に比べて２つ目のパラメーターが必要な特殊タイプなので、今回は'format'の実装はナシ。
     telephone = 'telephone'
 }
 

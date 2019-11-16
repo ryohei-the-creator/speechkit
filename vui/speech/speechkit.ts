@@ -41,6 +41,7 @@ export class SpeechKit {
 
     createSimpleResponse() {
         const lastType = Object.keys(this.watcher)[0];
+        this.watcher = {};
         console.log(lastType)
         if (lastType === 'text') {
             this.speechText = this.speechText.trim();
