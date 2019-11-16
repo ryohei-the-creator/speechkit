@@ -9,3 +9,26 @@ You need to write down speech tags for controlling speed, volume and such parame
 ## 使用言語
 typescript
 
+## 実行関数
+```
+const speechkit = new SpeechKit()
+speechkit.sayAs('アイウエオ', sayas.expletive);
+speechkit.prosody({
+    [prosody.pitch]: -20,
+    [prosody.rate]: 110
+}, 'うううう。声が枯れてしまったようだ...');
+speechkit.emphasis('high', 'ヤッホ！');
+speechkit.sayAs('こんな感じで読み上げることができます。', sayas.cardinal)
+const simpleresponse = speechkit.createSimpleResponse();
+console.dir(simpleresponse);
+
+```
+
+## 実行結果
+```
+{ 
+    speechText: '<speak><say-as interpret-as="expletive">アイウエオ</say-as><prosody pitch="-20st" rate="110%">うううう。声が枯れてしまったようだ...</prosody><emphasis level="high">ヤッホ！</emphasis><say-as interpret-as="cardinal">こんな感じで読み上げることができます。</say-as></speak>',
+    
+    displayText: 'アイウエオ うううう。声が枯れてしまったようだ... こんな感じで読み上げることができます。 ' 
+}
+  ```
