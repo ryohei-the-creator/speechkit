@@ -1,4 +1,5 @@
-# vui-toolkit
+# speechkit for Voice Assitant app development
+
 ## 概要
 https://developers.google.com/assistant/actions/reference/ssml#tts_simulator
 
