@@ -1,6 +1,7 @@
 
-import { singleton } from './singleton';
-
+import { AudioManager } from './audiomanager';
+import { SayAsManager } from './sayasmanager';
+import { ProsodyManager } from './prosodymanager';
 export class SpeechKit {
 
     private speechText: string;
@@ -21,22 +22,46 @@ export class SpeechKit {
 
     audio(parameters: any) {
         this.watcher = { 'audio': true }
-        singleton.audioManager.selectParams(parameters)
+        const audioManager = new AudioManager()
+        audioManager.selectParams(parameters)
+        const format = audioManager.createFormat()
+        this.speechText += format
+    }
+
+    sayAs(text: string, type: any) {
+        this.watcher = { 'sayas': true }
+        const sayasManager = new SayAsManager()
+        sayasManager.replaceTAG(type)
+        sayasManager.replaceText(text)
+        const format = sayasManager.createFormat();
+        console.log(format)
+        this.speechText += format;
+        this.displayText += text + ' ';
     }
     
+    prosody(parameters: any, text: string) {
+        this.watcher = { 'prosody': true }
+        const prosodyManager = new ProsodyManager();
+        prosodyManager.selectParams(parameters);
+        prosodyManager.replaceText(text)
+        const format = prosodyManager.createFormat()
+        this.speechText += format;
+        this.displayText += text + ' ';
+    }
+
+    emphasis(level: any, text: string) {
+        // strong, moderate, none, reduced
+        this.speechText += `<emphasis level="${level}">${text}</emphasis>`
+    }
+
     pause(timer: number) {
         this.watcher = { 'pause': true }
         this.speechText += `<break time="${timer}" />`
     }
 
-    sayAs(text: string, type: any) {
-        this.watcher = { 'sayas': true }
-        singleton.sayasManager.replaceTAG(type)
-        singleton.sayasManager.replaceText(text)
-        const format = singleton.sayasManager.createFormat();
-        console.log(format)
-        this.speechText += format;
-        this.displayText += text;
+    sub(paraphrase: string, word: string) {
+        // example: <sub alias="にっぽんばし">日本橋</sub>
+        this.speechText += `<sub alias="${paraphrase}">${word}</sub>`
     }
 
     createSimpleResponse() {

@@ -10,7 +10,7 @@ var SayAs;
     SayAs["bleep"] = "bleep";
     SayAs["unit"] = "unit";
     SayAs["verbatim"] = "verbatim";
-    SayAs["spellout"] = "spellout";
+    SayAs["spellout"] = "spell-out";
     SayAs["date"] = "date";
     SayAs["telephone"] = "telephone";
 })(SayAs = exports.SayAs || (exports.SayAs = {}));
